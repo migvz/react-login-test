@@ -32,22 +32,19 @@ if (cluster.isMaster) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
       res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-      next();
-  });
-  app.get('/', (req, res) => {
-      res.send('Please use post');
+      return next();
   });
   app.post('/login',(req,res) => {
-      if(req.body.username === "me" && req.body.password === "letmein"){
-          res.send(JSON.stringify({ version: process.version , 
-              date: new Date(),
-              username:req.body.username,
-              password: req.body.password
-          }));
+      const {username, password} = req.body;
+      if(username === "me" && password === "letmein"){
+          return res.json({ version: process.version , 
+              date: new Date(), 
+              username,
+              password
+          });
       }
       else{
-          res.status(500);
-          res.send(JSON.stringify({ error: "Access Denied"}));
+           return res.status(500).json({ error: "Access Denied"});
       }
   });
 
