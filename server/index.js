@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,10 +25,30 @@ if (cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-  // Answer API requests.
-  app.get('/api', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
+  //Development of custom API
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+  app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+      next();
+  });
+  app.get('/', (req, res) => {
+      res.send('Please use post');
+  });
+  app.post('/login',(req,res) => {
+      if(req.body.username === "me" && req.body.password === "letmein"){
+          res.send(JSON.stringify({ version: process.version , 
+              date: new Date(),
+              username:req.body.username,
+              password: req.body.password
+          }));
+      }
+      else{
+          res.status(500);
+          res.send(JSON.stringify({ error: "Access Denied"}));
+      }
   });
 
   // All remaining requests return the React app, so it can handle routing.

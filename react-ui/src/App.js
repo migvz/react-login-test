@@ -14,7 +14,7 @@ class App extends Component {
     if(!this.state.user || !this.state.password){
       return this.setState({errorMsg:"Please enter credentials"})
     }
-    var url = `//${window.location.hostname}:3001/login`;
+    var url = `/login`;
     var data = {username: this.state.user , password:this.state.password};
     
     fetch(url, {
