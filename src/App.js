@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Input from './components/input/Input'
 class App extends Component {
@@ -13,9 +12,9 @@ class App extends Component {
   clickLogin(e){
     e.preventDefault(); 
     if(!this.state.user || !this.state.password){
-      return this.setState({errorMsg:"Please enter a user and password"})
+      return this.setState({errorMsg:"Please enter credentials"})
     }
-    var url = 'http://127.0.0.1/';
+    var url = `//${window.location.hostname}:3001/login`;
     var data = {username: this.state.user , password:this.state.password};
     
     fetch(url, {
@@ -64,8 +63,9 @@ class App extends Component {
               ariaReq="true"
               id="password"
               onChange={this.updatePassword}
+              type="password"
             />
-            {this.state.errorMsg !== ""? <div className="errorMsg">{this.state.errorMsg}</div>:null}
+            <div className="errorMsg">{this.state.errorMsg}</div>
             <button onClick={this.clickLogin}>Enter</button>
             {version}
           </form>

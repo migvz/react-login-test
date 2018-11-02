@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('Please use post');
 });
-app.post('/',(req,res) => {
+app.post('/login',(req,res) => {
     if(req.body.username === "me" && req.body.password === "letmein"){
         res.send(JSON.stringify({ version: process.version , 
             date: new Date(),
@@ -26,6 +26,6 @@ app.post('/',(req,res) => {
     }
 });
 
-app.listen(80,() => {
+app.listen(3001,() => {
     console.log('up and running');
 });
