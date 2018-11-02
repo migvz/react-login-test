@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './Input.css';
+import './Input.css'
 
 class Input extends Component {
   render() {
     const idInput=this.props.id?this.props.id:`default-id-${Math.round(Math.random()*1000)}`; 
-  
+    
     return (
       <div>
         <label htmlFor={idInput}>

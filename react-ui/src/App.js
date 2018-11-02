@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Input from './components/input/Input'
+import Input from './components/input/Input';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { appData : {}, user:"", password:"", errorMsg:""}
+    this.state = { appData : {}, user:'', password:'', errorMsg:''};
     this.updatePassword = this.updatePassword.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.clickLogin = this.clickLogin.bind(this);
@@ -12,10 +12,10 @@ class App extends Component {
   clickLogin(e){
     e.preventDefault(); 
     if(!this.state.user || !this.state.password){
-      return this.setState({errorMsg:"Please enter credentials"})
+      return this.setState({errorMsg:'Please enter credentials'});
     }
-    var url = `/login`;
-    var data = {username: this.state.user , password:this.state.password};
+    const url = `/login`;
+    const data = {username: this.state.user , password:this.state.password};
     
     fetch(url, {
       method: 'POST', 
@@ -36,7 +36,7 @@ class App extends Component {
    }
 
    updatePassword(e){
-       this.setState({password: e.target.value})
+       this.setState({password:e.target.value})
   }
   render() {
       let version=[];
@@ -50,22 +50,22 @@ class App extends Component {
                       />);
       }
     return (
-      <div className="App">
+      <div className='App'>
           <form>
             <Input
-              text="User"
-              ariaReq="true"
-              id="user"
+              text='User'
+              ariaReq='true'
+              id='user'
               onChange={this.updateUser}
             />
             <Input
-              text="Password"
-              ariaReq="true"
-              id="password"
+              text='Password'
+              ariaReq='true'
+              id='password'
               onChange={this.updatePassword}
-              type="password"
+              type='password'
             />
-            <div className="errorMsg">{this.state.errorMsg}</div>
+            <div className='errorMsg'>{this.state.errorMsg}</div>
             <button onClick={this.clickLogin}>Enter</button>
             {version}
           </form>
