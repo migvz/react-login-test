@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Input.css'
+import './Input.css';
 
 class Input extends Component {
   render() {
@@ -11,9 +11,9 @@ class Input extends Component {
           {this.props.text}
         </label>
         <input 
-            type={this.props.type?this.props.type:"text"} 
+            type={this.props.type?this.props.type:'text'} 
             id={idInput}
-            aria-required={this.props.ariaReq?this.props.ariaReq:"false"} 
+            aria-required={this.props.ariaReq?this.props.ariaReq:'false'} 
             onChange={this.props.onChange}
             defaultValue={this.props.defaultValue}
         />
