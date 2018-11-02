@@ -43,7 +43,7 @@ class App extends Component {
       for (let i in this.state.appData)
       {
         version.push(<Input 
-                      text={`value of:${i}`}
+                      text={`Value for ${i} `}
                       defaultValue={this.state.appData[i]}
                       id={`r-${i}`}
                       key={`r-${i}`}
